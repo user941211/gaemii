@@ -1,23 +1,34 @@
-import logo from './logo.svg';
 import './App.css';
+import {useState} from "react";
+
 
 function App() {
+  const[toDo, setToDo] = useState("");
+  const [toDos, setToDos] = useState([]);
+  const onChange = (event) => setToDo(event.target.value);
+  //console.log(toDo);
+  const onSubmit = (event) => {
+    event.preventDefault();
+    if(toDo ===""){return;}
+    
+    setToDos(currentArray => [toDo, ...currentArray]);
+    setToDo("");
+  }
+  console.log(toDos);
+  //form 내에서 button이 한개만 있으면 자동적으로 submit의 역할을 한다.
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>ToDo 리스트!!</h1>
+      <form onSubmit={onSubmit}>
+        <input 
+          onChange={onChange}
+          value={toDo} 
+          type ="text" 
+          placeholder="입력"
+        />
+        <button>ADD</button>
+        
+      </form>
     </div>
   );
 }
